@@ -304,3 +304,74 @@ for (let i = 0; i < estoque.length; i++) {
     console.log("Notebook:", element);
   }
 }
+
+
+//DESAFIO 2 (03/06/26)
+
+//QUESTÃO 1 (media e alunos aprovados):
+const alunos = [
+  { nome: "Ana", notas: [8, 7, 9] },
+  { nome: "Bruno", notas: [5, 6, 5] },
+  { nome: "Carla", notas: [9, 9, 10] },
+  { nome: "Diego", notas: [6, 7, 8] },
+];
+
+const aprovados = alunos
+.map((aluno) => {
+  const soma = aluno.notas.reduce((total, nota) => total + nota, 0);
+  const media = soma / aluno.notas.length;
+
+  return {
+    nome: aluno.nome,
+    media: Number(media.toFixed(2))
+  };
+})
+ .filter((aluno) => aluno.media >= 7)
+ .sort((primeiro, segundo) => segundo.media - primeiro.media);
+
+console.log ("~~~~ ALUNOS APROVADOS: ~~~~");
+console.log ("> Parabéns!!");
+console.log(aprovados);
+
+  //QUESTÃO 2 (filmes):
+
+const filmes = [
+  { titulo: "O Senhor dos Anéis", ano: 2001, genero: "fantasia" },
+  { titulo: "Matrix", ano: 1999, genero: "ficção" },
+  { titulo: "Interestelar", ano: 2014, genero: "ficção" },
+  { titulo: "Divertida Mente", ano: 2015, genero: "animação" },
+];
+
+function buscarFilmes(genero, criterio) {
+  let resultado = filmes.filter((filme) => filme.genero === genero);
+
+  if (criterio === "ano") {
+    resultado.sort((a, b) => b.ano - a.ano);
+  } else if (criterio === "titulo") {
+    resultado.sort((a, b) => {
+      if (a.titulo > b.titulo) {
+        return 1;
+      } else if (a.titulo < b.titulo) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
+  return resultado.map(
+    (filme) => `${filme.titulo} (${filme.ano}) - ${filme.genero}`
+  );
+}
+
+console.log ("~~~~ CATÁLOGO DE FILMES - CLARAFLIX: ~~~~");
+console.log (">> Você pesquisou por: 'filmes de ficção': (● u ●) ");
+console.log(buscarFilmes("ficção", "ano"));
+
+
+
+
+
+
+
+
